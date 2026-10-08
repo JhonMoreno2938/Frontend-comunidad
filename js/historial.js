@@ -20,7 +20,7 @@ let allEvents = [];
 
 // Al cargar la página, consultamos el endpoint GET de FastAPI
 document.addEventListener("DOMContentLoaded", async function() {
-    const apiUrl = 'http://192.168.0.107/:8000/api/auth/events';
+    const apiUrl = 'http://192.168.0.107:8000/api/auth/events';
     
     try {
         const response = await fetch(apiUrl, {

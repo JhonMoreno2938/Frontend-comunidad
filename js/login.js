@@ -8,7 +8,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     errorDiv.style.display = 'none';
 
     // Apuntamos al endpoint de tu API en FastAPI
-    const apiUrl = 'http://192.168.0.107/:8000/api/auth/login';
+    const apiUrl = 'http://192.168.0.107:8000/api/auth/login';
 
     try {
         const response = await fetch(apiUrl, {

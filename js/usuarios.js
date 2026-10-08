@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 async function loadUsers() {
-    const apiUrl = 'http://192.168.0.107/api/auth/users';
+    const apiUrl = 'http://192.168.0.107:8000/api/auth/users';
     
     try {
         const response = await fetch(apiUrl, {
@@ -72,7 +72,7 @@ function renderTable(users) {
 
 // Función para alternar el estado (Activar / Desactivar) consumiendo el endpoint PUT
 async function toggleUserStatus(username) {
-    const apiUrl = 'http://192.168.0.107/api/auth/toggle-status';
+    const apiUrl = 'http://192.168.0.107:8000/api/auth/toggle-status';
     
     try {
         const response = await fetch(apiUrl, {
