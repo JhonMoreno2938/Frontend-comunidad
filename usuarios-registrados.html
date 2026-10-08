@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Usuarios - Panel de Administración</title>
+    <!-- Vinculamos el CSS externo -->
+    <link rel="stylesheet" href="/css/usuarios.css">
+</head>
+<body>
+
+    <main class="container">
+
+        <!-- Cabecera: título + botón cerrar sesión -->
+        <div class="header-section">
+            <h2>Gestión de Usuarios Registrados</h2>
+            <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
+        </div>
+
+        <!-- Tabla de Usuarios (envuelta para scroll horizontal en móvil) -->
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTableBody">
+                    <tr>
+                        <td colspan="3" style="text-align: center;">Cargando usuarios...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+
+    <!-- Vinculamos el JS externo -->
+    <script src="/js/usuarios.js"></script>
+</body>
+</html>

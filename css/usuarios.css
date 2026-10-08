@@ -1,0 +1,167 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Cabecera interna: título + botón */
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+h2 {
+    color: #2d3748;
+    margin: 0;
+    font-size: 22px;
+}
+
+.logout-btn {
+    background-color: #e53e3e;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.logout-btn:hover {
+    background-color: #c53030;
+}
+
+/* Contenedor de la tabla (scroll horizontal solo aquí) */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 500px; /* fuerza scroll en pantallas muy estrechas */
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 14px;
+    word-break: break-word;
+}
+
+th {
+    background-color: #3182ce;
+    color: white;
+    white-space: nowrap;
+}
+
+tr:hover {
+    background-color: #f7fafc;
+}
+
+.btn-action {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.btn-activate {
+    background-color: #38a169;
+}
+
+.btn-activate:hover {
+    background-color: #2f855a;
+}
+
+.btn-deactivate {
+    background-color: #e53e3e;
+}
+
+.btn-deactivate:hover {
+    background-color: #c53030;
+}
+
+/* ===== RESPONSIVE ===== */
+
+/* Tablets (hasta 768px) */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .header-section {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    h2 {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .logout-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    th, td {
+        padding: 10px;
+        font-size: 13px;
+    }
+}
+
+/* Móviles (hasta 480px) */
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 12px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    table {
+        min-width: 420px; /* más estrecha para que no haya tanto scroll */
+    }
+
+    th, td {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    .btn-action {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+}

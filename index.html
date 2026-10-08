@@ -8,76 +8,46 @@
     <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
-    <div class="login-card">
+    <main class="login-card">
         <h2>Iniciar Sesión</h2>
-        <form id="loginForm">
+
+        <form id="loginForm" novalidate>
             <div class="form-group">
                 <label for="username">Usuario</label>
-                <input type="text" id="username" placeholder="Ej. estudiante" required>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Ej. estudiante"
+                    autocomplete="username"
+                    required>
             </div>
+
             <div class="form-group">
                 <label for="password">Contraseña</label>
-                <input type="password" id="password" placeholder="Ej. 123456" required>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Ej. 123456"
+                    autocomplete="current-password"
+                    required>
             </div>
+
             <button type="submit" class="btn-login">Entrar</button>
-            <div id="errorMsg" class="error-msg">Usuario o contraseña incorrectos</div>
+
+            <div id="errorMsg" class="error-msg" role="alert">
+                Usuario o contraseña incorrectos
+            </div>
         </form>
 
-        <!-- Enlaces de navegación -->
+        <!-- Enlace de recuperación de contraseña -->
         <div class="register-link">
-            <a href="register.html">¿No tienes cuenta? Regístrate aquí</a>
+            <a href="update-password.html">¿Olvidaste tu contraseña? Actualizar aquí</a>
         </div>
-        <div class="register-link" style="margin-top: 10px;">
-            <a href="update-password.html" style="font-size: 13px; color: #718096;">¿Olvidaste tu contraseña? Actualizar aquí</a>
-        </div>
-    </div>
+    </main>
 
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const usernameInput = document.getElementById('username').value;
-            const passwordInput = document.getElementById('password').value;
-            const errorDiv = document.getElementById('errorMsg');
-            
-            errorDiv.style.display = 'none';
-
-            // Apuntamos al endpoint de tu API en FastAPI
-            const apiUrl = 'http://192.168.0.107:8000/api/auth/login';
-
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        username: usernameInput,
-                        password: passwordInput
-                    })
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    
-                    // Almacenamos el token devuelto por tu API
-                    localStorage.setItem('access_token', data.access_token);
-                    localStorage.setItem('refresh_token', data.refresh_token);
-                    localStorage.setItem('username', usernameInput);
-
-                    // Redirección exitosa al dashboard
-                    window.location.href = 'dashboard.html';
-                } else {
-                    const errorData = await response.json();
-                    errorDiv.innerText = errorData.detail || 'Usuario o contraseña incorrectos';
-                    errorDiv.style.display = 'block';
-                }
-            } catch (error) {
-                console.error('Error de conexión con la API:', error);
-                errorDiv.innerText = 'Error al conectar con el servidor';
-                errorDiv.style.display = 'block';
-            }
-        });
-    </script>
+    <!-- Vinculamos el archivo JavaScript externo -->
+    <script src="/js/login.js"></script>
 </body>
 </html>

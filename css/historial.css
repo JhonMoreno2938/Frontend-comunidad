@@ -1,0 +1,196 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Cabecera interna para alinear título y botón */
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+h2 {
+    color: #2d3748;
+    margin: 0;
+    font-size: 22px;
+}
+
+.logout-btn {
+    background-color: #e53e3e;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.logout-btn:hover {
+    background-color: #c53030;
+}
+
+/* Filtros */
+.filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    background: #edf2f7;
+    padding: 15px;
+    border-radius: 6px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1 1 200px;
+    min-width: 0;
+}
+
+.filter-group label {
+    font-size: 12px;
+    font-weight: bold;
+    color: #4a5568;
+}
+
+.filter-group input,
+.filter-group select {
+    padding: 8px;
+    border: 1px solid #cbd5e0;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+/* Contenedor de la tabla */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+}
+
+/* La tabla se ajusta sin scroll horizontal */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;   /* columnas de ancho proporcional */
+}
+
+th, td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 13px;
+    word-break: break-word;
+    white-space: normal;
+    vertical-align: top;
+    line-height: 1.4;      /* evita que el thead se estire */
+}
+
+th {
+    background-color: #3182ce;
+    color: white;
+    height: auto;          /* que no se estire */
+    padding: 12px;         /* un poco más de aire arriba/abajo */
+}
+
+tr:hover {
+    background-color: #f7fafc;
+}
+
+/* Anchos proporcionales para las 4 columnas */
+th:nth-child(1), td:nth-child(1) { width: 18%; }  /* Usuario */
+th:nth-child(2), td:nth-child(2) { width: 27%; }  /* Inicio */
+th:nth-child(3), td:nth-child(3) { width: 27%; }  /* Último Acceso */
+th:nth-child(4), td:nth-child(4) { width: 28%; }  /* IP */
+
+/* ===== RESPONSIVE ===== */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .header-section {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    h2 {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .logout-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .filters {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .filter-group {
+        width: 100%;
+        flex: none;
+    }
+
+    .filter-group input,
+    .filter-group select {
+        font-size: 16px; /* evita zoom en iOS */
+    }
+
+    th, td {
+        padding: 8px 6px;
+        font-size: 12px;
+    }
+
+    /* Ajuste proporcional en pantallas pequeñas */
+    th:nth-child(1), td:nth-child(1) { width: 20%; }
+    th:nth-child(2), td:nth-child(2) { width: 26%; }
+    th:nth-child(3), td:nth-child(3) { width: 26%; }
+    th:nth-child(4), td:nth-child(4) { width: 28%; }
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 12px;
+    }
+
+    th, td {
+        font-size: 11px;
+        padding: 6px 4px;
+    }
+
+    th:nth-child(1), td:nth-child(1) { width: 18%; }
+    th:nth-child(2), td:nth-child(2) { width: 27%; }
+    th:nth-child(3), td:nth-child(3) { width: 27%; }
+    th:nth-child(4), td:nth-child(4) { width: 28%; }
+}

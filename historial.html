@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Accesos - Panel de Administración</title>
+    <!-- Vinculamos el CSS externo -->
+    <link rel="stylesheet" href="/css/historial.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- Cabecera: título + botón de cerrar sesión -->
+        <div class="header-section">
+            <h2>Historial de Inicios de Sesión</h2>
+            <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
+        </div>
+
+        <!-- Panel de Filtros -->
+        <div class="filters">
+            <div class="filter-group">
+                <label for="filterUser">Usuario:</label>
+                <input type="text" id="filterUser" placeholder="Buscar usuario..." onkeyup="filterTable()">
+            </div>
+            <div class="filter-group">
+                <label for="filterYear">Año:</label>
+                <input type="text" id="filterYear" placeholder="Ej. 2026" onkeyup="filterTable()">
+            </div>
+            <div class="filter-group">
+                <label for="filterStartHour">Hora Inicio (HH:MM):</label>
+                <input type="time" id="filterStartHour" onchange="filterTable()">
+            </div>
+            <div class="filter-group">
+                <label for="filterEndHour">Hora Fin (HH:MM):</label>
+                <input type="time" id="filterEndHour" onchange="filterTable()">
+            </div>
+        </div>
+
+        <!-- Tabla de Eventos (envuelta en .table-responsive) -->
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Inicio (Started)</th>
+                        <th>Último Acceso (Last Access)</th>
+                        <th>Dirección IP</th>
+                    </tr>
+                </thead>
+                <tbody id="eventsTableBody">
+                    <tr>
+                        <td colspan="4" style="text-align: center;">Cargando historial...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- Vinculamos el archivo JavaScript externo -->
+    <script src="/js/historial.js"></script>
+</body>
+</html>
