@@ -1,0 +1,165 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-attachment: fixed; /* evita que el degradado se corte en móvil */
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Tarjetas de Login y Registro */
+.login-card, .register-card {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 350px;
+}
+
+.login-card h2, .register-card h2 {
+    margin-top: 0;
+    margin-bottom: 24px;
+    color: #333;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+    font-size: 14px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px; /* evita el zoom automático en iOS */
+    transition: border-color 0.2s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+}
+
+/* Botones */
+.btn-login, .btn-submit {
+    width: 100%;
+    padding: 12px;
+    background: #667eea;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s ease;
+}
+
+.btn-login:hover, .btn-submit:hover {
+    background: #5a6fd6;
+}
+
+.btn-login:active, .btn-submit:active {
+    transform: scale(0.98);
+}
+
+.btn-login:disabled, .btn-submit:disabled {
+    background: #a0aec0;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Enlaces de navegación */
+.register-link, .back-link {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.register-link a, .back-link a {
+    color: #667eea;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.register-link a:hover, .back-link a:hover {
+    text-decoration: underline;
+    color: #5a6fd6;
+}
+
+/* Mensajes de error y éxito */
+.error-msg {
+    color: #e53e3e;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 10px;
+    display: none;
+}
+
+.msg {
+    font-size: 13px;
+    text-align: center;
+    margin-top: 10px;
+    display: none;
+}
+
+.msg.visible {
+    display: block; /* el JS solo añade/quita esta clase */
+}
+
+.success-msg {
+    color: #38a169;
+}
+
+/* ===== RESPONSIVE ===== */
+@media screen and (max-width: 480px) {
+    body {
+        padding: 12px;
+        align-items: flex-start;
+        padding-top: 6vh;
+    }
+
+    .login-card, .register-card {
+        padding: 25px 20px;
+        max-width: 100%;
+    }
+
+    .login-card h2, .register-card h2 {
+        font-size: 22px;
+        margin-bottom: 18px;
+    }
+}
+
+/* Landscape en móviles con poca altura (teclado abierto o rotación) */
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    body {
+        align-items: flex-start;
+        padding-top: 10px;
+    }
+
+    .login-card, .register-card {
+        padding: 20px 25px;
+    }
+
+    .login-card h2, .register-card h2 {
+        font-size: 20px;
+        margin-bottom: 14px;
+    }
+}

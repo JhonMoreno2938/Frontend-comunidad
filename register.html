@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta - Registro</title>
+    <!-- Vinculamos el archivo CSS externo -->
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+<body>
+    <main class="register-card">
+        <h2>Crear Cuenta</h2>
+
+        <form id="registerForm" novalidate>
+            <div class="form-group">
+                <label for="newUsername">Nombre de Usuario</label>
+                <input
+                    type="text"
+                    id="newUsername"
+                    name="newUsername"
+                    placeholder="Ej. nuevo_usuario"
+                    autocomplete="username"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="newPassword">Contraseña</label>
+                <input
+                    type="password"
+                    id="newPassword"
+                    name="newPassword"
+                    placeholder="Ej. contraseña123"
+                    autocomplete="new-password"
+                    required>
+            </div>
+
+            <button type="submit" class="btn-submit">Guardar</button>
+
+            <div id="successMsg" class="msg success-msg" role="status">
+                ¡Usuario registrado con éxito!
+            </div>
+
+            <div id="errorMsg" class="msg error-msg" role="alert">
+                Hubo un error al registrar el usuario
+            </div>
+        </form>
+
+    </main>
+
+    <!-- Vinculamos el archivo JavaScript externo -->
+    <script src="/js/register.js"></script>
+</body>
+</html>
