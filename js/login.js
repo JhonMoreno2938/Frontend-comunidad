@@ -1,3 +1,23 @@
+// ============================================
+// LOGIN - SERVICIO A
+// ============================================
+
+// ============================================
+// VERIFICAR SI VIENE DE UN LOGOUT DE OTRO SERVICIO
+// ============================================
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('logout') === 'true') {
+    console.log('🔒 Logout solicitado desde otro servicio. Limpiando sesión...');
+    localStorage.clear();
+    sessionStorage.clear();
+    
+    // Limpiamos el parámetro de la URL para que no quede feo
+    window.history.replaceState({}, document.title, window.location.pathname);
+}
+
+// ============================================
+// MANEJO DEL FORMULARIO DE LOGIN
+// ============================================
 document.getElementById('loginForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     
@@ -30,6 +50,8 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             localStorage.setItem('refresh_token', data.refresh_token);
             localStorage.setItem('username', usernameInput);
             localStorage.setItem('roles', JSON.stringify(data.roles));
+
+            console.log('✅ Login exitoso:', usernameInput);
 
             // Validamos los roles para la redirección correspondiente
             if (data.roles && data.roles.includes('admin')) {
