@@ -29,34 +29,40 @@ if (!loggedUser) {
         userDisplay.innerText = loggedUser;
     }
     console.log('✅ Usuario logueado:', loggedUser);
+}
 
-    // ============================================
-    // CONSTRUIR DINÁMICAMENTE TODOS LOS ENLACES
-    // ============================================
-    // Mapeamos cada ID del HTML con su servicio correspondiente.
-    // Si agregas una nueva tarjeta, solo añades una línea aquí.
-    const enlacesConfig = {
-        'linkViajes':    SERVICIOS.viajes,
-        'linkHistorial': SERVICIOS.historial,
-        'linkRegistro':  SERVICIOS.registro,
-    };
+// ============================================
+// FUNCIÓN DE REDIRECCIÓN A SERVICIOS
+// ============================================
+// Esta función se llama desde el onclick de cada tarjeta del HTML.
+// Recibe el nombre del servicio (ej: 'viajes') y redirige a su URL
+// pasando el usuario como parámetro.
+function irAServicio(nombreServicio) {
+    // 1. Verificamos que el usuario esté logueado
+    const usuario = localStorage.getItem('username');
+    
+    if (!usuario) {
+        console.error('❌ No hay usuario logueado. Redirigiendo al login...');
+        window.location.href = 'index.html';
+        return;
+    }
 
-    // Recorremos todos los enlaces y les asignamos la URL con el usuario
-    Object.keys(enlacesConfig).forEach(id => {
-        const elemento = document.getElementById(id);
-        const urlBase = enlacesConfig[id];
+    // 2. Buscamos la URL base del servicio en la configuración
+    const urlBase = SERVICIOS[nombreServicio];
+    
+    if (!urlBase) {
+        console.error(`❌ El servicio "${nombreServicio}" no está configurado`);
+        alert(`El servicio "${nombreServicio}" no está disponible.`);
+        return;
+    }
 
-        if (elemento && urlBase) {
-            // Construimos la URL final con el parámetro ?usuario=
-            const urlFinal = `${urlBase}/?usuario=${encodeURIComponent(loggedUser)}`;
-            elemento.href = urlFinal;
-            console.log(`🔗 ${id} → ${urlFinal}`);
-        } else if (elemento && !urlBase) {
-            console.warn(`⚠️ El servicio para #${id} no está configurado en SERVICIOS`);
-        } else {
-            console.warn(`⚠️ No se encontró el elemento #${id} en el HTML`);
-        }
-    });
+    // 3. Construimos la URL final con el parámetro usuario
+    const urlFinal = `${urlBase}/?usuario=${encodeURIComponent(usuario)}`;
+    
+    console.log(`🔗 Redirigiendo a ${nombreServicio}: ${urlFinal}`);
+    
+    // 4. Redirigimos al servicio
+    window.location.href = urlFinal;
 }
 
 // ============================================
