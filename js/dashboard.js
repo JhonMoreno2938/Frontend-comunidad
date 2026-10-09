@@ -2,33 +2,59 @@
 // DASHBOARD - SERVICIO A
 // ============================================
 
-// 1. Verificar que el usuario esté logueado
+// ============================================
+// CONFIGURACIÓN CENTRAL DE SERVICIOS
+// ============================================
+// Aquí defines las URLs de TODOS tus microservicios.
+// Si mañana cambia un puerto o IP, solo editas aquí.
+const SERVICIOS = {
+    viajes:    'http://192.168.0.107:3001',
+    historial: 'http://192.168.0.107:3002', // Ejemplo futuro
+    registro:  'http://192.168.0.107:3003', // Ejemplo futuro
+};
+
+// ============================================
+// VERIFICAR SESIÓN DEL USUARIO
+// ============================================
 const loggedUser = localStorage.getItem('username');
 
 if (!loggedUser) {
-    // Si alguien intenta entrar aquí sin loguearse, lo devolvemos al login
+    // Si no hay usuario logueado, lo devolvemos al login
     console.warn('⚠️ No hay usuario logueado. Redirigiendo al login...');
     window.location.href = 'index.html';
 } else {
-    // 2. Mostrar el usuario en la barra superior
+    // Mostrar el usuario en la barra superior
     const userDisplay = document.getElementById('userDisplay');
     if (userDisplay) {
         userDisplay.innerText = loggedUser;
     }
     console.log('✅ Usuario logueado:', loggedUser);
 
-    // 3. Construir dinámicamente el enlace al Servicio B
-    // Esperamos a que el DOM esté listo por si acaso
-    document.addEventListener('DOMContentLoaded', () => {
-        const linkViajes = document.getElementById('linkViajes');
-        
-        if (linkViajes) {
-            // Construimos la URL pasando el usuario como parámetro
-            const urlServicioB = `http://192.168.0.107:3001/?usuario=${encodeURIComponent(loggedUser)}`;
-            linkViajes.href = urlServicioB;
-            console.log('🔗 Enlace a Servicio B configurado:', urlServicioB);
+    // ============================================
+    // CONSTRUIR DINÁMICAMENTE TODOS LOS ENLACES
+    // ============================================
+    // Mapeamos cada ID del HTML con su servicio correspondiente.
+    // Si agregas una nueva tarjeta, solo añades una línea aquí.
+    const enlacesConfig = {
+        'linkViajes':    SERVICIOS.viajes,
+        'linkHistorial': SERVICIOS.historial,
+        'linkRegistro':  SERVICIOS.registro,
+    };
+
+    // Recorremos todos los enlaces y les asignamos la URL con el usuario
+    Object.keys(enlacesConfig).forEach(id => {
+        const elemento = document.getElementById(id);
+        const urlBase = enlacesConfig[id];
+
+        if (elemento && urlBase) {
+            // Construimos la URL final con el parámetro ?usuario=
+            const urlFinal = `${urlBase}/?usuario=${encodeURIComponent(loggedUser)}`;
+            elemento.href = urlFinal;
+            console.log(`🔗 ${id} → ${urlFinal}`);
+        } else if (elemento && !urlBase) {
+            console.warn(`⚠️ El servicio para #${id} no está configurado en SERVICIOS`);
         } else {
-            console.error('❌ No se encontró el elemento #linkViajes');
+            console.warn(`⚠️ No se encontró el elemento #${id} en el HTML`);
         }
     });
 }
