@@ -27,9 +27,8 @@
         <div class="dashboard-container">
             <!-- Cuadrícula de tarjetas -->
             <div class="cards-grid">
-                
+
                 <!-- Tarjeta 1: Viajes (Apuntando al Servicio B) -->
-                <!-- Le quitamos el href fijo y le ponemos un id para que JS lo maneje -->
                 <a href="#" id="linkViajes" class="nav-card">
                     <img src="img/images.jpg" alt="Gestión" class="card-img">
                     <div class="card-title">Viajes</div>
@@ -50,39 +49,8 @@
         </div>
     </main>
 
-    <!-- Vinculamos el archivo JavaScript externo (si tienes uno, ej: dashboard.js) -->
+    <!-- Vinculamos el archivo JavaScript externo -->
     <script src="/js/dashboard.js"></script>
-
-    <!-- Script para construir dinámicamente el enlace al Servicio B -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // 1. Obtenemos el usuario. 
-            // Intentamos leer de localStorage. Si no está, lo tomamos de la URL actual (por si acaso).
-            // Si no, usamos 'usuario31' como fallback.
-            const urlParams = new URLSearchParams(window.location.search);
-            const usuario = localStorage.getItem('usuario') 
-                         || localStorage.getItem('preferred_username') 
-                         || urlParams.get('usuario') 
-                         || 'usuario31';
-
-            // 2. Mostramos el usuario en la barra superior
-            const userDisplay = document.getElementById('userDisplay');
-            if (userDisplay) {
-                userDisplay.innerText = usuario;
-            }
-
-            // 3. Construimos la URL del Servicio B pasando el usuario como parámetro
-            // ¡Aquí está la magia! Se pasa ?usuario=usuario31 al Servicio B
-            const urlServicioB = `http://192.168.0.107:3001/?usuario=${encodeURIComponent(usuario)}`;
-            
-            // 4. Asignamos esa URL al enlace de la tarjeta "Viajes"
-            const linkViajes = document.getElementById('linkViajes');
-            if (linkViajes) {
-                linkViajes.href = urlServicioB;
-                console.log('Enlace a Servicio B configurado:', urlServicioB);
-            }
-        });
-    </script>
 </body>
 
 </html>
