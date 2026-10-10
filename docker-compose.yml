@@ -3,5 +3,5 @@ services:
     build: .
     container_name: frontend-web
     ports:
-      - "80:80" # Mapea el puerto 80 de tu servidor al puerto 80 del contenedor
+      - "8081:80" # Mapea el puerto 80 de tu servidor al puerto 80 del contenedor
     restart: always
