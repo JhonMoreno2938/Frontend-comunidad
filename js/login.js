@@ -27,8 +27,8 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     
     errorDiv.style.display = 'none';
 
-    // Apuntamos al endpoint de tu API en FastAPI
-    const apiUrl = 'http://192.168.0.107:8000/api/auth/login';
+    // 👇 NUEVA IP DEL SERVIDOR (192.168.0.103) 👇
+    const apiUrl = 'http://192.168.0.103:8000/api/auth/login';
 
     try {
         const response = await fetch(apiUrl, {
@@ -52,17 +52,25 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             localStorage.setItem('roles', JSON.stringify(data.roles));
 
             console.log('✅ Login exitoso:', usernameInput);
+            console.log('🎭 Roles del usuario:', data.roles);
 
-            // Validamos los roles para la redirección correspondiente
-            if (data.roles && data.roles.includes('admin')) {
-                // Si es administrador principal, va al historial
-                window.location.href = 'historial.html';
-            } else if (data.roles && data.roles.includes('administrador_junta')) {
-                // Si tiene el rol administrador_junta, va a la gestión de usuarios registrados
-                window.location.href = 'usuarios-registrados.html';
-            } else {
-                // Si es un usuario normal, va al dashboard estándar
+            // ============================================
+            // REDIRECCIÓN SEGÚN EL ROL
+            // ============================================
+            if (data.roles && data.roles.includes('gitlab')) {
+                // Si tiene el rol "gitlab", va DIRECTAMENTE al SSO de GitLab
+                // (sin pasar por la pantalla de login de GitLab)
+                console.log('➡️ Redirigiendo al SSO de GitLab...');
+                window.location.href = 'http://192.168.0.103:8090/users/auth/openid_connect';
+            } else if (data.roles && data.roles.includes('dashboard')) {
+                // Si tiene el rol "dashboard", va al Dashboard
+                console.log('➡️ Redirigiendo al Dashboard...');
                 window.location.href = 'dashboard.html';
+            } else {
+                // Si no tiene ninguno de los roles anteriores, error
+                console.warn('⚠️ Usuario sin rol asignado');
+                errorDiv.innerText = 'No tienes acceso a ningún servicio. Contacta al administrador.';
+                errorDiv.style.display = 'block';
             }
         } else {
             const errorData = await response.json();

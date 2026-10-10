@@ -10,8 +10,8 @@ document.getElementById('updateForm').addEventListener('submit', async function(
     errorDiv.style.display = 'none';
 
     try {
-        // Petición PUT hacia tu endpoint de actualización en FastAPI
-        const response = await fetch('http://192.168.0.107:8000/api/auth/update-password', {
+        // 👇 IP ACTUALIZADA + ENDPOINT CORRECTO (/update-user) 👇
+        const response = await fetch('http://192.168.0.103:8000/api/auth/update-user', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

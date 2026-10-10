@@ -9,8 +9,8 @@ try {
     userRoles = [];
 }
 
-// Si no hay token o no es administrador, expulsamos al usuario al index
-if (!accessToken || !userRoles.includes('admin')) {
+// Si no hay token o no tiene el rol adecuado, expulsamos al usuario al index
+if (!accessToken || !userRoles.includes('dashboard')) {
     localStorage.clear();
     window.location.href = 'index.html';
 }
@@ -20,7 +20,8 @@ let allEvents = [];
 
 // Al cargar la página, consultamos el endpoint GET de FastAPI
 document.addEventListener("DOMContentLoaded", async function() {
-    const apiUrl = 'http://192.168.0.107:8000/api/auth/events';
+    // 👇 NUEVA IP DEL SERVIDOR (192.168.0.103) 👇
+    const apiUrl = 'http://192.168.0.103:8000/api/auth/events';
     
     try {
         const response = await fetch(apiUrl, {
