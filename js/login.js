@@ -58,10 +58,14 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             // REDIRECCIÓN SEGÚN EL ROL
             // ============================================
             if (data.roles && data.roles.includes('gitlab')) {
-                // Si tiene el rol "gitlab", va DIRECTAMENTE al SSO de GitLab
-                // (sin pasar por la pantalla de login de GitLab)
+                // Si tiene el rol "gitlab", iniciamos el flujo OIDC hacia GitLab.
+                // Para evitar que Keycloak pida la contraseña otra vez, 
+                // podemos abrir la URL de autenticación del cliente "gitlab".
                 console.log('➡️ Redirigiendo al SSO de GitLab...');
+                
+                // Redirigimos al punto de entrada de OpenID Connect de GitLab
                 window.location.href = 'http://192.168.0.103:8090/users/auth/openid_connect';
+
             } else if (data.roles && data.roles.includes('dashboard')) {
                 // Si tiene el rol "dashboard", va al Dashboard
                 console.log('➡️ Redirigiendo al Dashboard...');
